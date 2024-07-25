@@ -10,6 +10,7 @@
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>@yield('title') | Chrwyn</title>
 </head>
 
@@ -24,13 +25,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+                        <a class="nav-link" href="blog">บทความ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact">Contact</a>
+                        <a class="nav-link" href="blog/insert">เขียนบทความ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about">About</a>
+                        <a class="nav-link" href="contact">ติดต่อ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about">เกี่ยวกับเรา</a>
                     </li>
                 </ul>
             </div>
