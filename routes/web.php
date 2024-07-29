@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,8 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', [AdminController::class, 'index']);
+// for user
+Route::get('/', [BlogController::class, 'index']);
 
 Route::get('about', [AdminController::class, 'displayAbout'])->name('about');
 
@@ -29,10 +32,8 @@ Route::get('admin/chrwyn', function () {
     return "Admin Chrwyn";
 })->name('admin.chrwyn');
 
-Route::fallback(function () {
-    return "Route not found";
-});
 
+// for author
 Route::prefix('blog')->group(function () {
     Route::get('/', [AdminController::class, 'getAllBlogs']);
     Route::get('insert', [AdminController::class, 'insertPage']);
@@ -40,4 +41,13 @@ Route::prefix('blog')->group(function () {
     Route::get('update/{id}', [AdminController::class, 'updateBlogPage']);
     Route::post('update/{id}', [AdminController::class, 'updateBlog']);
     Route::get('delete/{id}', [AdminController::class, 'deleteBlog']);
+    Route::get('updateStatus/{id}', [AdminController::class, 'updateStatus']);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::fallback(function () {
+    return "Route not found";
 });

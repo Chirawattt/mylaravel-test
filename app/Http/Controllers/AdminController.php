@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Blog;
+use Illuminate\Support\Facades\DB; // query builder
+use App\Models\Blog; // Eloquent ORM
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index()
     {
         return view('home');
@@ -22,7 +28,8 @@ class AdminController extends Controller
 
     function getAllBlogs()
     {
-        $blogs = DB::table('blogs')->get(); // query builder
+        // $blogs = Blog::paginate(5); // Eloquent ORM
+        $blogs = DB::table('blogs')->paginate(5); // query builder
         return view('blog', compact('blogs'));
     }
 
@@ -79,6 +86,14 @@ class AdminController extends Controller
         $oldBlog->title = $request->title;
         $oldBlog->content = $request->content;
         $oldBlog->save();
+        return redirect('blog');
+    }
+
+    function updateStatus($id)
+    {
+        $blog = Blog::find($id);
+        $blog->status = !$blog->status;
+        $blog->save();
         return redirect('blog');
     }
 
